@@ -1,0 +1,8 @@
+import sqlite3
+import pandas as pd
+
+conn = sqlite3.connect("data/FINA 4420 - NBA DB.db")
+
+df = pd.read_sql_query("SELECT * FROM your_table_name", conn)
+
+conn.close()

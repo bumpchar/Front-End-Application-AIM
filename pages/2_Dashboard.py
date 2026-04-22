@@ -2,6 +2,18 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
+import sqlite3
+
+conn = sqlite3.connect("data/FINA 4420 - NBA DB.db")
+
+cursor = conn.cursor()
+cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
+
+tables = cursor.fetchall()
+st.write(tables)  # use this instead of print for Streamlit
+
+conn.close()
+
 st.title("NBA News Dashboard")
 st.write("Explore recent NBA news with filters and interactive charts.")
 

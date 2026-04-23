@@ -8,6 +8,8 @@ st.set_page_config(
 
 st.title("What's New in the Association? 🏀")
 
+st.image("assets/Lebron_celly.gif", width=500)
+
 st.markdown("""
 Ask questions about **NBA stats** and **game recaps** in one place.
 
@@ -44,6 +46,3 @@ st.markdown("""
 - Summarize the Lakers vs Warriors game recap.
 - What were the main reasons the Celtics won?
 """)
-
-st.subheader("MY KING!")
-st.image("assets/lebron.gif", width=500)

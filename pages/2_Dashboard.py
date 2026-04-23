@@ -13,31 +13,33 @@ def load_data():
     player_stats = pd.read_csv("player_stats.csv")
     players = pd.read_csv("players.csv")
 
-    # Dates
+    # dates
     team_stats["game_date"] = pd.to_datetime(team_stats["game_date"], errors="coerce")
     player_stats["game_date"] = pd.to_datetime(player_stats["game_date"], errors="coerce")
 
-    # Clean team data
+    # clean team data
     team_stats = team_stats[team_stats["team_id"] != 0]
     team_stats = team_stats[team_stats["team_score"].notna()]
     team_stats = team_stats[team_stats["win"].notna()]
 
-    # Team names
+    # keep recent player data only so dropdown is not insane
+    player_stats = player_stats[player_stats["game_date"].dt.year >= 2023]
+
+    # names
     teams["team_name"] = teams["city"].fillna("") + " " + teams["nickname"].fillna("")
     teams["team_name"] = teams["team_name"].str.strip()
 
-    # Player names
     players["player_name"] = players["first_name"].fillna("") + " " + players["last_name"].fillna("")
     players["player_name"] = players["player_name"].str.strip()
 
-    # Merge team names into team stats
+    # merge team names
     team_df = team_stats.merge(
         teams[["team_id", "team_name"]],
         on="team_id",
         how="left"
     )
 
-    # Merge player names into player stats
+    # merge player names
     player_df = player_stats.merge(
         players[["player_id", "player_name"]],
         on="player_id",
@@ -115,32 +117,41 @@ with col_b:
 st.divider()
 st.subheader("Player Analysis")
 
-player_names = sorted(player_df["player_name"].dropna().unique().tolist())
+# show actual columns so you can see the right stat names
+with st.expander("See player_stats column names"):
+    st.write(player_df.columns.tolist())
+
+# limit dropdown to players with recent games only
+recent_players = (
+    player_df.dropna(subset=["player_name"])
+    .groupby("player_name")
+    .size()
+    .reset_index(name="games")
+)
+
+recent_players = recent_players[recent_players["games"] >= 10]
+player_names = sorted(recent_players["player_name"].tolist())
+
 selected_player = st.selectbox("Select Player", player_names)
 
 player_only_df = player_df[player_df["player_name"] == selected_player].copy()
 
-# Use the actual likely column names in your file
-points_col = "pts" if "pts" in player_only_df.columns else None
-rebounds_col = "reb" if "reb" in player_only_df.columns else None
-assists_col = "ast" if "ast" in player_only_df.columns else None
+# try several likely stat column names
+def pick_col(df, options):
+    for col in options:
+        if col in df.columns:
+            return col
+    return None
+
+points_col = pick_col(player_only_df, ["pts", "points", "point"])
+rebounds_col = pick_col(player_only_df, ["reb", "rebounds", "trb"])
+assists_col = pick_col(player_only_df, ["ast", "assists"])
 
 p1, p2, p3 = st.columns(3)
 
-if points_col:
-    p1.metric("Avg Points", round(player_only_df[points_col].mean(), 1))
-else:
-    p1.metric("Avg Points", "N/A")
-
-if rebounds_col:
-    p2.metric("Avg Rebounds", round(player_only_df[rebounds_col].mean(), 1))
-else:
-    p2.metric("Avg Rebounds", "N/A")
-
-if assists_col:
-    p3.metric("Avg Assists", round(player_only_df[assists_col].mean(), 1))
-else:
-    p3.metric("Avg Assists", "N/A")
+p1.metric("Avg Points", round(player_only_df[points_col].mean(), 1) if points_col else "N/A")
+p2.metric("Avg Rebounds", round(player_only_df[rebounds_col].mean(), 1) if rebounds_col else "N/A")
+p3.metric("Avg Assists", round(player_only_df[assists_col].mean(), 1) if assists_col else "N/A")
 
 col_c, col_d = st.columns(2)
 

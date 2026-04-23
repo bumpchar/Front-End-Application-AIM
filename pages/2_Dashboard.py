@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import sqlite3
 
 import sqlite3
 
@@ -17,13 +18,17 @@ conn.close()
 st.title("NBA News Dashboard")
 st.write("Explore recent NBA news with filters and interactive charts.")
 
+import sqlite3
+
 @st.cache_data
 def load_data():
-    df = pd.read_csv("data/nba_news.csv")
-    df["published"] = pd.to_datetime(df["published"], errors="coerce")
+    conn = sqlite3.connect("data/nba_news.db")
+    df = pd.read_sql_query("SELECT * FROM sqlite_master WHERE type='table';", conn)
+    conn.close()
     return df
 
 df = load_data()
+st.write(df)
 
 st.sidebar.header("Filters")
 

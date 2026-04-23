@@ -71,6 +71,17 @@ section[data-testid="stSidebar"] * {
     background-color: #ea580c;
     color: white;
 }
+
+div[data-baseweb="input"] input {
+    color: white !important;
+    -webkit-text-fill-color: white !important;
+}
+
+/* Fix placeholder text */
+div[data-baseweb="input"] input::placeholder {
+    color: #cbd5e1 !important;
+}
+
 </style>
 """, unsafe_allow_html=True)
 

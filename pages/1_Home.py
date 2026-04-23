@@ -33,12 +33,12 @@ with col1:
 with col2:
     st.info("**Chatbot**")
     if st.button("Open Chatbot"):
-        st.switch_page("pages/2_Chatbot.py")
+        st.switch_page("pages/3_Chatbot.py")
 
 with col3:
     st.info("**Data Editor**")
     if st.button("Open Data Editor"):
-        st.switch_page("pages/2_Data_Editor.py")
+        st.switch_page("pages/4_Data_Editor.py")
 
 st.subheader("What Our App Looks Like")
 

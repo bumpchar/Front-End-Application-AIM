@@ -14,12 +14,12 @@ st.markdown("""
     color: white;
 }
 
-/* Make normal text lighter */
+/* Make all text white */
 html, body, [class*="css"]  {
     color: white;
 }
 
-/* Section cards */
+/* Cards / containers */
 .card {
     background-color: rgba(255, 255, 255, 0.06);
     padding: 20px;
@@ -28,19 +28,28 @@ html, body, [class*="css"]  {
     box-shadow: 0 4px 14px rgba(0,0,0,0.25);
 }
 
-/* Subheaders */
-h2, h3 {
+/* Headers */
+h1, h2, h3 {
     color: #f8fafc;
 }
 
-/* Caption text */
+/* Subtext */
 [data-testid="stCaptionContainer"] {
     color: #cbd5e1;
 }
 
+/* Metrics (fix ugly dark text) */
+[data-testid="stMetricValue"] {
+    color: white;
+}
+
+/* Sidebar */
+section[data-testid="stSidebar"] {
+    background-color: #E5E7EB;
+}
+
 /* Buttons */
 .stButton > button {
-    width: 100%;
     border-radius: 10px;
     background-color: #f97316;
     color: white;

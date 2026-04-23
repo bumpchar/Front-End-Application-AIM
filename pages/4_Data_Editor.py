@@ -23,8 +23,8 @@ def build_db():
 
     conn.close()
 
-if os.path.exists("nba.sqlite"):
-    os.remove("nba.sqlite")
+if not os.path.exists("nba.sqlite"):
+    build_db()
 
 build_db()
 

@@ -5,85 +5,18 @@ import os
 
 st.markdown("""
 <style>
-/* Main app background */
 .stApp {
     background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
     color: white;
 }
 
-/* Make all text white */
-html, body, [class*="css"]  {
-    color: white;
-}
-
-/* Form labels and widget labels */
-[data-testid="stWidgetLabel"],
+h1, h2, h3, h4, p, label,
 [data-testid="stMarkdownContainer"],
-label,
-p {
+[data-testid="stWidgetLabel"],
+[data-testid="stMetricValue"] {
     color: white !important;
 }
 
-/* Selectbox text */
-div[data-baseweb="select"] * {
-    color: white !important;
-}
-
-/* Number input text */
-input {
-    color: white !important;
-}
-
-section[data-testid="stSidebar"] * {
-    color: #0f172a !important;
-}
-
-/* Input fields (number + text inputs) */
-input, textarea {
-    background-color: #1e293b !important;
-    color: white !important;
-}
-
-/* Number input arrows + container */
-div[data-baseweb="input"] {
-    background-color: #1e293b !important;
-    color: white !important;
-}
-
-/* Selectbox dropdown */
-div[data-baseweb="select"] {
-    background-color: #1e293b !important;
-    color: white !important;
-}
-
-/* Selectbox closed box */
-div[data-baseweb="select"] > div {
-    background-color: #1e293b !important;
-    color: white !important;
-}
-
-/* Selectbox selected value */
-div[data-baseweb="select"] span {
-    color: white !important;
-}
-
-/* Selectbox dropdown menu */
-ul[role="listbox"] {
-    background-color: #1e293b !important;
-}
-
-/* Selectbox dropdown options */
-ul[role="listbox"] li {
-    color: white !important;
-    background-color: #1e293b !important;
-}
-
-/* Hovered option */
-ul[role="listbox"] li:hover {
-    background-color: #334155 !important;
-}
-
-/* Cards / containers */
 .card {
     background-color: rgba(255, 255, 255, 0.06);
     padding: 20px;
@@ -92,27 +25,40 @@ ul[role="listbox"] li:hover {
     box-shadow: 0 4px 14px rgba(0,0,0,0.25);
 }
 
-/* Headers */
-h1, h2, h3 {
-    color: #f8fafc;
-}
-
-/* Subtext */
 [data-testid="stCaptionContainer"] {
-    color: #cbd5e1;
+    color: #cbd5e1 !important;
 }
 
-/* Metrics (fix ugly dark text) */
-[data-testid="stMetricValue"] {
-    color: white;
+input, textarea,
+div[data-baseweb="input"],
+div[data-baseweb="select"],
+div[data-baseweb="select"] > div {
+    background-color: #1e293b !important;
+    color: white !important;
 }
 
-/* Sidebar */
+div[data-baseweb="select"] * {
+    color: white !important;
+}
+
+ul[role="listbox"],
+ul[role="listbox"] li {
+    background-color: #1e293b !important;
+    color: white !important;
+}
+
+ul[role="listbox"] li:hover {
+    background-color: #334155 !important;
+}
+
 section[data-testid="stSidebar"] {
     background-color: #E5E7EB;
 }
 
-/* Buttons */
+section[data-testid="stSidebar"] * {
+    color: #0f172a !important;
+}
+
 .stButton > button {
     border-radius: 10px;
     background-color: #f97316;

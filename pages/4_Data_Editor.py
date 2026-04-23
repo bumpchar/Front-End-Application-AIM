@@ -28,12 +28,34 @@ if os.path.exists("nba.sqlite"):
 
 build_db()
 
-def load_table(table_name):
+def load_player_editor_data():
     conn = sqlite3.connect("nba.sqlite")
-    df = pd.read_sql_query(f"SELECT * FROM {table_name}", conn)
+
+    player_stats = pd.read_sql_query("SELECT * FROM player_stats", conn)
+    players = pd.read_sql_query("SELECT * FROM players", conn)
+
     conn.close()
-    return df
+
+    # dates
+    player_stats["game_date"] = pd.to_datetime(player_stats["game_date"], errors="coerce")
+
+    # keep recent rows only
+    player_stats = player_stats[player_stats["game_date"].dt.year >= 2023]
+
+    # create player name
+    players["player_name"] = (
+        players["first_name"].fillna("") + " " + players["last_name"].fillna("")
+    ).str.strip()
+
+    # merge player name into stats
+    player_df = player_stats.merge(
+        players[["player_id", "player_name"]],
+        on="player_id",
+        how="left"
+    )
+
+    return player_df
 
 st.title("Data Editor")
-df = load_table("player_stats")
+df = df = load_player_editor_data()
 st.dataframe(df)

@@ -11,7 +11,7 @@ st.title("What's New in the Association? 🏀")
 col1, col2, col3 = st.columns([1,2,1])
 
 with col2:
-    st.image("assets/nba.gif", width=500)
+    st.image("assets/Lebron_celly.gif", width=500)
 
 st.markdown("""
 Ask questions about **NBA stats** and **game recaps** in one place.

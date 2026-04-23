@@ -20,7 +20,7 @@ df = load_data()
 st.write("Rows:", len(df))
 
 team_ids = sorted(df["team_id"].dropna().unique().tolist())
-selected_team = st.sidebar.selectbox("Select Team ID", team_ids)
+selected_team = st.sidebar.selectbox("Select Team ID", team_ids, index=1)
 
 filtered_df = df[df["team_id"] == selected_team]
 

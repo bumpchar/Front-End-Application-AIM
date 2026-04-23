@@ -21,7 +21,8 @@ col1, col2, col3 = st.columns(3)
 
 with col1:
     st.info("**Dashboard**\n\nView team and player trends.")
-    st.button("Open Dashboard")
+    st.button("Open Dashboard"):
+        st.switch_page("pages/dashboard.py")
 
 with col2:
     st.info("**Chatbot**\n\nAsk stats or recap questions.")

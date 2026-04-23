@@ -14,7 +14,7 @@ with col2:
     st.image("assets/Lebron_celly.gif", use_container_width=True)
 
 st.markdown("""
-Ask questions about **NBA stats** and **game recaps** in one place.
+Anything you need to know about the NBA all in one place.
 
 - **Dashboard** → View team and player trends.
 - **Chatbot** → Ask stats or recap questions.

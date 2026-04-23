@@ -122,3 +122,30 @@ selected_row = df[df["ID"] == selected_id].iloc[0]
 
 st.write("Selected row:")
 st.write(selected_row)
+
+st.subheader("Update Row")
+
+with st.form("update_form"):
+    new_points = st.number_input("Points", value=int(selected_row["points"]))
+    new_assists = st.number_input("Assists", value=int(selected_row["assists"]))
+    new_blocks = st.number_input("Blocks", value=int(selected_row["blocks"]))
+    new_steals = st.number_input("Steals", value=int(selected_row["steals"]))
+
+    submitted = st.form_submit_button("Update Row")
+
+    if submitted:
+        conn = sqlite3.connect("nba.sqlite")
+        cursor = conn.cursor()
+
+        cursor.execute("""
+            UPDATE player_stats
+            SET points = ?, assists = ?, blocks = ?, steals = ?
+            WHERE ID = ?
+        """, (new_points, new_assists, new_blocks, new_steals, selected_id))
+
+        conn.commit()
+        conn.close()
+
+        st.cache_data.clear()
+        st.success(f"Row {selected_id} updated!")
+        st.rerun()

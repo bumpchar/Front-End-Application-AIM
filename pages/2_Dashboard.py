@@ -4,10 +4,15 @@ import plotly.express as px
 
 st.title("NBA Dashboard")
 
-@st.cache_data
 def load_data():
     df = pd.read_csv("team_stats.csv")
     df["game_date"] = pd.to_datetime(df["game_date"], errors="coerce")
+
+    # 🔥 REMOVE BAD ROWS (this is the fix)
+    df = df[df["team_id"] != 0]
+    df = df[df["team_score"].notna()]
+    df = df[df["win"].notna()]
+
     return df
 
 df = load_data()

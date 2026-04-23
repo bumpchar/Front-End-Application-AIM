@@ -1,6 +1,7 @@
 import os
 import warnings
 import streamlit as st
+from dotenv import load_dotenv
 
 from intro_to_agents.rag.embedders import SentenceTransformerEmbedder
 from intro_to_agents.rag.vector_databases import ChromaDBVectorDB

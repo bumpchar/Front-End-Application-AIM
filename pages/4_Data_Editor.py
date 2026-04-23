@@ -3,11 +3,6 @@ import sqlite3
 import pandas as pd
 import os
 
-import streamlit as st
-import sqlite3
-import pandas as pd
-import os
-
 def build_db():
     conn = sqlite3.connect("nba.sqlite")
 
@@ -26,6 +21,7 @@ def build_db():
 if not os.path.exists("nba.sqlite"):
     build_db()
 
+@st.cache_data
 def load_player_editor_data():
     conn = sqlite3.connect("nba.sqlite")
 
@@ -34,29 +30,25 @@ def load_player_editor_data():
 
     conn.close()
 
-    # dates
     player_stats["game_date"] = pd.to_datetime(player_stats["game_date"], errors="coerce")
-
-    # keep recent rows only
     player_stats = player_stats[player_stats["game_date"].dt.year >= 2023]
 
-    # create player name
     players["player_name"] = (
         players["first_name"].fillna("") + " " + players["last_name"].fillna("")
     ).str.strip()
 
-    # merge player name into stats
     player_df = player_stats.merge(
         players[["player_id", "player_name"]],
         on="player_id",
         how="left"
     )
-    
+
     cols = ["player_name"] + [col for col in player_df.columns if col != "player_name"]
     player_df = player_df[cols]
-    
+
     return player_df
 
 st.title("Data Editor")
+
 df = load_player_editor_data()
-st.dataframe(df)
+st.dataframe(df, use_container_width=True)

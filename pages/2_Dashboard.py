@@ -22,8 +22,6 @@ def load_data():
     team_stats = team_stats[team_stats["team_score"].notna()]
     team_stats = team_stats[team_stats["win"].notna()]
 
-    # clean player data
-    player_stats = player_stats[player_stats["team_id"] != 0]
 
     # team names
     teams["team_name"] = teams["city"] + " " + teams["nickname"]

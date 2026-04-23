@@ -46,4 +46,4 @@ st.markdown("""
 """)
 
 st.subheader("MY KING!")
-st.image("assets/lebron.gif", use_container_width=True)
+st.image("assets/lebron.gif", width=500)

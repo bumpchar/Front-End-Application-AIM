@@ -41,7 +41,7 @@ h1, h2, h3 {
 
 /* Sidebar */
 section[data-testid="stSidebar"] {
-    background-color: #020617;
+    background-color: #C8C8C8;
 }
 
 /* Buttons */

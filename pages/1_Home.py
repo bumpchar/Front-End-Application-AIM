@@ -6,7 +6,7 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("What's New in the Association?🏀")
+st.title("What's New in the Association? 🏀")
 
 st.markdown("""
 Ask questions about **NBA stats** and **game recaps** in one place.
@@ -21,7 +21,7 @@ col1, col2, col3 = st.columns(3)
 
 with col1:
     st.info("**Dashboard**\n\nView team and player trends.")
-    st.button("Open Dashboard"):
+    if st.button("Open Dashboard"):
         st.switch_page("pages/2_Dashboard.py")
 
 with col2:

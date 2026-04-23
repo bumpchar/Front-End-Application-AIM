@@ -94,7 +94,7 @@ st.subheader("What Our App Looks Like")
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    st.image("assets/image.png")
+    st.image("assets/NBA_App_Dashboard.png")
     st.caption("Dashboard: Track team and player performance")
 
 with col2:

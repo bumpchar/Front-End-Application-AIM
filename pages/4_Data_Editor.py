@@ -16,6 +16,24 @@ html, body, [class*="css"]  {
     color: white;
 }
 
+/* Form labels and widget labels */
+[data-testid="stWidgetLabel"],
+[data-testid="stMarkdownContainer"],
+label,
+p {
+    color: white !important;
+}
+
+/* Selectbox text */
+div[data-baseweb="select"] * {
+    color: white !important;
+}
+
+/* Number input text */
+input {
+    color: white !important;
+}
+
 /* Cards / containers */
 .card {
     background-color: rgba(255, 255, 255, 0.06);

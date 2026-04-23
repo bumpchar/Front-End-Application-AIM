@@ -1,4 +1,7 @@
 import streamlit as st
 
-st.title("Home")
-st.write("Eoin's page")
+st.set_page_config(
+    page_title="NBA Multi-Agent Assistant",
+    page_icon="🏀",
+    layout="wide"
+)

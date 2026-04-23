@@ -13,48 +13,43 @@ def load_data():
     player_stats = pd.read_csv("player_stats.csv")
     players = pd.read_csv("players.csv")
 
-    # dates
+    # Dates
     team_stats["game_date"] = pd.to_datetime(team_stats["game_date"], errors="coerce")
     player_stats["game_date"] = pd.to_datetime(player_stats["game_date"], errors="coerce")
 
-    # clean team data
+    # Clean team data
     team_stats = team_stats[team_stats["team_id"] != 0]
     team_stats = team_stats[team_stats["team_score"].notna()]
     team_stats = team_stats[team_stats["win"].notna()]
 
+    # Team names
+    teams["team_name"] = teams["city"].fillna("") + " " + teams["nickname"].fillna("")
+    teams["team_name"] = teams["team_name"].str.strip()
 
-    # team names
-    teams["team_name"] = teams["city"] + " " + teams["nickname"]
-
-    # player names
+    # Player names
     players["player_name"] = players["first_name"].fillna("") + " " + players["last_name"].fillna("")
     players["player_name"] = players["player_name"].str.strip()
 
-    # merge team names
+    # Merge team names into team stats
     team_df = team_stats.merge(
         teams[["team_id", "team_name"]],
         on="team_id",
         how="left"
     )
 
-    # merge player names + team names
+    # Merge player names into player stats
     player_df = player_stats.merge(
         players[["player_id", "player_name"]],
         on="player_id",
         how="left"
     )
 
-    player_df = player_df.merge(
-        teams[["team_id", "team_name"]],
-        on="team_id",
-        how="left"
-    )
-
     return team_df, player_df
+
 
 team_df, player_df = load_data()
 
-# ---------------- SIDEBAR ----------------
+# ---------- SIDEBAR ----------
 st.sidebar.header("Filters")
 
 team_names = sorted(team_df["team_name"].dropna().unique().tolist())
@@ -69,7 +64,7 @@ if location_filter == "Home":
 elif location_filter == "Away":
     filtered_team_df = filtered_team_df[filtered_team_df["home"] == 0]
 
-# ---------------- TEAM KPIs ----------------
+# ---------- TEAM OVERVIEW ----------
 st.subheader(f"{selected_team} Team Overview")
 
 col1, col2, col3 = st.columns(3)
@@ -79,7 +74,7 @@ col3.metric("Win Rate", f"{round(filtered_team_df['win'].mean() * 100, 1)}%")
 
 st.divider()
 
-# ---------------- TEAM CHARTS ----------------
+# ---------- TEAM CHARTS ----------
 monthly_df = filtered_team_df.copy()
 monthly_df["month"] = monthly_df["game_date"].dt.to_period("M").dt.to_timestamp()
 
@@ -116,22 +111,19 @@ with col_b:
     fig2.update_yaxes(tickformat=".0%")
     st.plotly_chart(fig2, use_container_width=True)
 
-# ---------------- PLAYER SECTION ----------------
+# ---------- PLAYER SECTION ----------
 st.divider()
-st.subheader(f"{selected_team} Player Analysis")
+st.subheader("Player Analysis")
 
-filtered_player_df = player_df[player_df["team_name"] == selected_team].copy()
-
-player_names = sorted(filtered_player_df["player_name"].dropna().unique().tolist())
-
+player_names = sorted(player_df["player_name"].dropna().unique().tolist())
 selected_player = st.selectbox("Select Player", player_names)
 
-player_only_df = filtered_player_df[filtered_player_df["player_name"] == selected_player].copy()
+player_only_df = player_df[player_df["player_name"] == selected_player].copy()
 
-# adjust these column names if needed based on your file
-points_col = "points" if "points" in player_only_df.columns else None
-rebounds_col = "rebounds" if "rebounds" in player_only_df.columns else None
-assists_col = "assists" if "assists" in player_only_df.columns else None
+# Use the actual likely column names in your file
+points_col = "pts" if "pts" in player_only_df.columns else None
+rebounds_col = "reb" if "reb" in player_only_df.columns else None
+assists_col = "ast" if "ast" in player_only_df.columns else None
 
 p1, p2, p3 = st.columns(3)
 
@@ -154,11 +146,11 @@ col_c, col_d = st.columns(2)
 
 with col_c:
     if points_col:
-        player_points_monthly = player_only_df.copy()
-        player_points_monthly["month"] = player_points_monthly["game_date"].dt.to_period("M").dt.to_timestamp()
+        player_monthly = player_only_df.copy()
+        player_monthly["month"] = player_monthly["game_date"].dt.to_period("M").dt.to_timestamp()
 
         points_by_month = (
-            player_points_monthly.groupby("month", as_index=False)[points_col]
+            player_monthly.groupby("month", as_index=False)[points_col]
             .mean()
             .sort_values("month")
         )
@@ -175,8 +167,7 @@ with col_d:
     if points_col:
         recent_points = (
             player_only_df.sort_values("game_date", ascending=False)
-            .head(10)
-            [["game_date", points_col]]
+            .head(10)[["game_date", points_col]]
             .sort_values("game_date")
         )
 
@@ -188,7 +179,7 @@ with col_d:
         )
         st.plotly_chart(fig4, use_container_width=True)
 
-# ---------------- TABLES ----------------
+# ---------- TABLES ----------
 st.divider()
 
 st.subheader("Recent Team Games")

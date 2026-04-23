@@ -1,0 +1,31 @@
+ID,team_id,city,nickname,abbreviation,year_founded
+1,1610612737,Atlanta,Hawks,ATL,1949
+2,1610612738,Boston,Celtics,BOS,1946
+3,1610612740,New Orleans,Pelicans,NOP,2002
+4,1610612741,Chicago,Bulls,CHI,1966
+5,1610612742,Dallas,Mavericks,DAL,1980
+6,1610612743,Denver,Nuggets,DEN,1976
+7,1610612745,Houston,Rockets,HOU,1967
+8,1610612746,Los Angeles,Clippers,LAC,1970
+9,1610612747,Los Angeles,Lakers,LAL,1948
+10,1610612748,Miami,Heat,MIA,1988
+11,1610612749,Milwaukee,Bucks,MIL,1968
+12,1610612750,Minnesota,Timberwolves,MIN,1989
+13,1610612751,Brooklyn,Nets,BKN,1976
+14,1610612752,New York,Knicks,NYK,1946
+15,1610612753,Orlando,Magic,ORL,1989
+16,1610612754,Indiana,Pacers,IND,1976
+17,1610612755,Philadelphia,76ers,PHI,1949
+18,1610612756,Phoenix,Suns,PHX,1968
+19,1610612757,Portland,Trail Blazers,POR,1970
+20,1610612758,Sacramento,Kings,SAC,1948
+21,1610612759,San Antonio,Spurs,SAS,1976
+22,1610612760,Oklahoma City,Thunder,OKC,1967
+23,1610612761,Toronto,Raptors,TOR,1995
+24,1610612762,Utah,Jazz,UTA,1974
+25,1610612763,Memphis,Grizzlies,MEM,1995
+26,1610612764,Washington,Wizards,WAS,1961
+27,1610612765,Detroit,Pistons,DET,1948
+28,1610612766,Charlotte,Hornets,CHA,1988
+29,1610612739,Cleveland,Cavaliers,CLE,1970
+30,1610612744,Golden State,Warriors,GSW,1946

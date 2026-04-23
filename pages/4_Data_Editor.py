@@ -24,17 +24,3 @@ def build_db():
     players.to_sql("players", conn, if_exists="replace", index=False)
 
     conn.close()
-
-if not os.path.exists("nba.sqlite"):
-    build_db()
-
-def load_table(table_name):
-    conn = sqlite3.connect("nba.sqlite")
-    df = pd.read_sql_query(f"SELECT * FROM {table_name}", conn)
-    conn.close()
-    return df
-
-st.title("Data Editor")
-
-df = load_table("player_stats")   # pick one table
-st.dataframe(df)

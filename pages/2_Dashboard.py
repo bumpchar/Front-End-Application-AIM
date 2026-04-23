@@ -6,7 +6,7 @@ st.title("NBA Dashboard")
 
 @st.cache_data
 def load_data():
-    df = pd.read_csv("data/team_stats.csv")
+    df = pd.read_csv("team_stats.csv")
     df["game_date"] = pd.to_datetime(df["game_date"], errors="coerce")
     return df
 

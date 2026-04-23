@@ -38,6 +38,24 @@ section[data-testid="stSidebar"] * {
     color: #0f172a !important;
 }
 
+/* Input fields (number + text inputs) */
+input, textarea {
+    background-color: #1e293b !important;
+    color: white !important;
+}
+
+/* Number input arrows + container */
+div[data-baseweb="input"] {
+    background-color: #1e293b !important;
+    color: white !important;
+}
+
+/* Selectbox dropdown */
+div[data-baseweb="select"] {
+    background-color: #1e293b !important;
+    color: white !important;
+}
+
 /* Cards / containers */
 .card {
     background-color: rgba(255, 255, 255, 0.06);

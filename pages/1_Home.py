@@ -32,20 +32,13 @@ with col1:
 
 with col2:
     st.info("**Chatbot**")
-    st.button("Open Chatbot")
+    if st.button("Open Chatbot"):
+        st.switch_page("pages/2_Chatbot.py")
 
 with col3:
     st.info("**Data Editor**")
-    st.button("Open Data Editor")
+    if st.button("Open Data Editor"):
+        st.switch_page("pages/2_Data_Editor.py")
 
-st.subheader("Example questions")
+st.subheader("What Our App Looks Like")
 
-st.markdown("""
-**Stats / SQL**
-- How many points did Jayson Tatum score last game?
-- Which team had the best 3-point percentage this week?
-
-**Recaps / RAG**
-- Summarize the Lakers vs Warriors game recap.
-- What were the main reasons the Celtics won?
-""")

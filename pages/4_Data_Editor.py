@@ -110,3 +110,15 @@ st.title("Data Editor")
 
 df = load_player_editor_data()
 st.dataframe(df, use_container_width=True)
+
+st.subheader("Edit Existing Row")
+
+selected_id = st.selectbox(
+    "Select row ID to edit",
+    df["ID"].tolist()
+)
+
+selected_row = df[df["ID"] == selected_id].iloc[0]
+
+st.write("Selected row:")
+st.write(selected_row)

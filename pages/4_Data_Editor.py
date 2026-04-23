@@ -54,8 +54,11 @@ def load_player_editor_data():
         how="left"
     )
 
+    cols = ["player_name"] + [col for col in player_df.columns if col != "player_name"]
+    player_df = player_df[cols]
+    
     return player_df
 
 st.title("Data Editor")
-df = df = load_player_editor_data()
+df = = load_player_editor_data()
 st.dataframe(df)

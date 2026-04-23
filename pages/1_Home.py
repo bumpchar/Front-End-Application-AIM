@@ -42,3 +42,19 @@ with col3:
 
 st.subheader("What Our App Looks Like")
 
+st.subheader("What our app looks like")
+
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.image("assets/image.png")
+    st.caption("Dashboard: Track team and player performance")
+
+with col2:
+    # st.image("assets/chatbot.png")
+    st.caption("Chatbot: Ask stats or game recap questions")
+
+with col3:
+    # st.image("assets/editor.png")
+    st.caption("Data Editor: Review and update data")
+

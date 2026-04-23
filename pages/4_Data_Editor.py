@@ -51,9 +51,6 @@ def load_player_editor_data():
         on="player_id",
         how="left"
     )
-    player_df["player_name"] = (
-        player_df["first_name"].fillna("") + " " + player_df["last_name"].fillna("")
-    ).str.strip()
     
     cols = ["player_name"] + [col for col in player_df.columns if col != "player_name"]
     player_df = player_df[cols]

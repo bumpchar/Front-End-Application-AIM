@@ -56,6 +56,33 @@ div[data-baseweb="select"] {
     color: white !important;
 }
 
+/* Selectbox closed box */
+div[data-baseweb="select"] > div {
+    background-color: #1e293b !important;
+    color: white !important;
+}
+
+/* Selectbox selected value */
+div[data-baseweb="select"] span {
+    color: white !important;
+}
+
+/* Selectbox dropdown menu */
+ul[role="listbox"] {
+    background-color: #1e293b !important;
+}
+
+/* Selectbox dropdown options */
+ul[role="listbox"] li {
+    color: white !important;
+    background-color: #1e293b !important;
+}
+
+/* Hovered option */
+ul[role="listbox"] li:hover {
+    background-color: #334155 !important;
+}
+
 /* Cards / containers */
 .card {
     background-color: rgba(255, 255, 255, 0.06);

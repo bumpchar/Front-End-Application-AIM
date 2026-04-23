@@ -34,6 +34,10 @@ input {
     color: white !important;
 }
 
+section[data-testid="stSidebar"] * {
+    color: #0f172a !important;
+}
+
 /* Cards / containers */
 .card {
     background-color: rgba(255, 255, 255, 0.06);

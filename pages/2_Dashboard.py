@@ -70,6 +70,27 @@ section[data-testid="stSidebar"] * {
     background-color: #ea580c;
     color: white;
 }
+
+.stButton > button:hover {
+    background-color: #ea580c;
+    color: white;
+}
+
+section[data-testid="stSidebar"] div[data-baseweb="select"],
+section[data-testid="stSidebar"] div[data-baseweb="select"] > div,
+section[data-testid="stSidebar"] div[data-baseweb="input"] {
+    background-color: white !important;
+    color: #0f172a !important;
+}
+
+section[data-testid="stSidebar"] div[data-baseweb="select"] * {
+    color: #0f172a !important;
+}
+
+section[data-testid="stSidebar"] input {
+    background-color: white !important;
+    color: #0f172a !important;
+}
 </style>
 """, unsafe_allow_html=True)
 

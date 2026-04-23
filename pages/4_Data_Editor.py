@@ -26,8 +26,6 @@ def build_db():
 if not os.path.exists("nba.sqlite"):
     build_db()
 
-build_db()
-
 def load_player_editor_data():
     conn = sqlite3.connect("nba.sqlite")
 
@@ -63,5 +61,5 @@ def load_player_editor_data():
     return player_df
 
 st.title("Data Editor")
-df = = load_player_editor_data()
+df = load_player_editor_data()
 st.dataframe(df)

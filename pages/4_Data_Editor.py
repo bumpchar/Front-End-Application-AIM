@@ -194,31 +194,88 @@ if st.button("Delete Selected Row"):
 
 st.subheader("Insert New Row")
 
+st.subheader("Insert New Row")
+
 with st.form("insert_form"):
-    insert_player_id = st.number_input("Player ID", min_value=0, step=1)
-    insert_game_id = st.number_input("Game ID", min_value=0, step=1)
-    insert_points = st.number_input("Points", min_value=0, step=1)
-    insert_assists = st.number_input("Assists", min_value=0, step=1)
-    insert_blocks = st.number_input("Blocks", min_value=0, step=1)
-    insert_steals = st.number_input("Steals", min_value=0, step=1)
+    insert_player_id = st.number_input("Player ID", min_value=0)
+    insert_game_id = st.number_input("Game ID", min_value=0)
+    insert_team_id = st.number_input("Player Team ID", min_value=0)
+    insert_opp_id = st.number_input("Opponent Team ID", min_value=0)
 
-    insert_submitted = st.form_submit_button("Insert Row")
+    insert_game_date = st.date_input("Game Date")
+    insert_game_time = st.text_input("Game Time (HH:MM:SS)")
+    insert_game_type = st.selectbox("Game Type", ["Regular Season", "Playoffs"])
 
-    if insert_submitted:
+    insert_win = st.selectbox("Win", [0, 1])
+    insert_home = st.selectbox("Home Game", [0, 1])
+
+    insert_minutes = st.number_input("Minutes", min_value=0.0)
+
+    insert_points = st.number_input("Points", min_value=0)
+    insert_assists = st.number_input("Assists", min_value=0)
+    insert_blocks = st.number_input("Blocks", min_value=0)
+    insert_steals = st.number_input("Steals", min_value=0)
+
+    insert_fga = st.number_input("Field Goals Attempted", min_value=0)
+    insert_fgm = st.number_input("Field Goals Made", min_value=0)
+
+    insert_3pa = st.number_input("3PT Attempted", min_value=0)
+    insert_3pm = st.number_input("3PT Made", min_value=0)
+
+    insert_fta = st.number_input("Free Throws Attempted", min_value=0)
+    insert_ftm = st.number_input("Free Throws Made", min_value=0)
+
+    insert_dreb = st.number_input("Defensive Rebounds", min_value=0)
+    insert_oreb = st.number_input("Offensive Rebounds", min_value=0)
+
+    insert_pf = st.number_input("Personal Fouls", min_value=0)
+    insert_turnovers = st.number_input("Turnovers", min_value=0)
+    insert_plus_minus = st.number_input("Plus/Minus", value=0)
+
+    submitted = st.form_submit_button("Insert Row")
+
+    if submitted:
         conn = sqlite3.connect("nba.sqlite")
         cursor = conn.cursor()
 
         cursor.execute("""
-            INSERT INTO player_stats
-            (player_id, game_id, points, assists, blocks, steals)
-            VALUES (?, ?, ?, ?, ?, ?)
+            INSERT INTO player_stats (
+                player_id, game_id, player_team_id, player_opponent_id,
+                game_date, game_time, game_type, win, home,
+                num_minutes, points, assists, blocks, steals,
+                field_goals_attempted, field_goals_made,
+                three_points_attempted, three_points_made,
+                free_throws_attempted, free_throws_made,
+                defensive_rebounds, offensive_rebounds,
+                personal_fouls, turnovers, plus_minus_points
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, (
             insert_player_id,
             insert_game_id,
+            insert_team_id,
+            insert_opp_id,
+            str(insert_game_date),
+            insert_game_time,
+            insert_game_type,
+            insert_win,
+            insert_home,
+            insert_minutes,
             insert_points,
             insert_assists,
             insert_blocks,
-            insert_steals
+            insert_steals,
+            insert_fga,
+            insert_fgm,
+            insert_3pa,
+            insert_3pm,
+            insert_fta,
+            insert_ftm,
+            insert_dreb,
+            insert_oreb,
+            insert_pf,
+            insert_turnovers,
+            insert_plus_minus
         ))
 
         conn.commit()

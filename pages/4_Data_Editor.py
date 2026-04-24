@@ -191,3 +191,39 @@ if st.button("Delete Selected Row"):
     st.cache_data.clear()
     st.success(f"Row {selected_id} deleted!")
     st.rerun()
+
+st.subheader("Insert New Row")
+
+with st.form("insert_form"):
+    insert_player_id = st.number_input("Player ID", min_value=0, step=1)
+    insert_game_id = st.number_input("Game ID", min_value=0, step=1)
+    insert_points = st.number_input("Points", min_value=0, step=1)
+    insert_assists = st.number_input("Assists", min_value=0, step=1)
+    insert_blocks = st.number_input("Blocks", min_value=0, step=1)
+    insert_steals = st.number_input("Steals", min_value=0, step=1)
+
+    insert_submitted = st.form_submit_button("Insert Row")
+
+    if insert_submitted:
+        conn = sqlite3.connect("nba.sqlite")
+        cursor = conn.cursor()
+
+        cursor.execute("""
+            INSERT INTO player_stats
+            (player_id, game_id, points, assists, blocks, steals)
+            VALUES (?, ?, ?, ?, ?, ?)
+        """, (
+            insert_player_id,
+            insert_game_id,
+            insert_points,
+            insert_assists,
+            insert_blocks,
+            insert_steals
+        ))
+
+        conn.commit()
+        conn.close()
+
+        st.cache_data.clear()
+        st.success("New row inserted!")
+        st.rerun()

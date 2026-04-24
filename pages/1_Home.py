@@ -111,6 +111,6 @@ with col2:
     st.caption("Chatbot: Ask stats or game recap questions")
 
 with col3:
-    #st.image("assets/NBA_App_Data_Editor.png")
+    st.image("assets/NBA_App_Data_Editor.png")
     st.caption("Data Editor: Review and update data")
 

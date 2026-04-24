@@ -143,7 +143,7 @@ def load_data():
 
 team_df, player_df = load_data()
 
-# ---------- SIDEBAR ----------
+# SIDEBAR 
 st.sidebar.header("Filters")
 
 team_names = sorted(team_df["team_name"].dropna().unique().tolist())
@@ -158,7 +158,7 @@ if location_filter == "Home":
 elif location_filter == "Away":
     filtered_team_df = filtered_team_df[filtered_team_df["home"] == 0]
 
-# ---------- TEAM OVERVIEW ----------
+# -TEAM OVERVIEW 
 st.subheader(f"{selected_team} Team Overview")
 
 col1, col2, col3 = st.columns(3)
@@ -168,7 +168,7 @@ col3.metric("Win Rate", f"{round(filtered_team_df['win'].mean() * 100, 1)}%")
 
 st.divider()
 
-# ---------- TEAM CHARTS ----------
+# - TEAM CHARTS 
 monthly_df = filtered_team_df.copy()
 monthly_df["month"] = monthly_df["game_date"].dt.to_period("M").dt.to_timestamp()
 
@@ -205,7 +205,7 @@ with col_b:
     fig2.update_yaxes(tickformat=".0%")
     st.plotly_chart(fig2, use_container_width=True)
 
-# ---------- PLAYER SECTION ----------
+# -PLAYER SECTION -
 st.divider()
 st.subheader("Player Analysis")
 
@@ -282,7 +282,7 @@ with col_d:
         )
         st.plotly_chart(fig4, use_container_width=True)
 
-# ---------- TABLES ----------
+# -TABLES
 st.divider()
 
 st.subheader("Recent Team Games")

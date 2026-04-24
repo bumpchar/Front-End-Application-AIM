@@ -6,6 +6,8 @@ st.write("This our ChatBot.")
 # Imports
 import os
 
+api_key = os.getenv("OPENAI_API_KEY")
+
 from dotenv import load_dotenv
 
 from intro_to_agents.rag.embedders import SentenceTransformerEmbedder

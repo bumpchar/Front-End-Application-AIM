@@ -107,7 +107,7 @@ with col1:
     st.caption("Dashboard: Track team and player performance")
 
 with col2:
-    # st.image("assets/.png")
+    st.image("assets/NBA_App_Chatbot.png")
     st.caption("Chatbot: Ask stats or game recap questions")
 
 with col3:

@@ -1,0 +1,3 @@
+from setuptools import setup, find_packages
+
+setup(name="intro_to_agents", packages=find_packages())

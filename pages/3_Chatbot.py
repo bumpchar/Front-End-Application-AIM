@@ -24,7 +24,7 @@ warnings.filterwarnings('ignore')
     # it is used to store sensitive information (like API keys) in a secure way
     # it is NOT included in the repository (you don't want to share your API key with others), so you will need to create it yourself
 load_dotenv()
-api_key = os.getenv(OPENAI_API_KEY= "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")
+api_key = os.getenv("OPENAI_API_KEY")
 
 # Instantiate the LLM
 model = "gpt-5-mini" # you can change the model to whatever you want (see from intro_to_agents.agents.llms import OPENAI_TOKEN_LIMITS)

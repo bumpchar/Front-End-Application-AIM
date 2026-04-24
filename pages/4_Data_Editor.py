@@ -173,3 +173,21 @@ with st.form("update_form"):
         st.cache_data.clear()
         st.success(f"Row {selected_id} updated!")
         st.rerun()
+
+st.subheader("Delete Row")
+
+if st.button("Delete Selected Row"):
+    conn = sqlite3.connect("nba.sqlite")
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        DELETE FROM player_stats
+        WHERE ID = ?
+    """, (selected_id,))
+
+    conn.commit()
+    conn.close()
+
+    st.cache_data.clear()
+    st.success(f"Row {selected_id} deleted!")
+    st.rerun()
